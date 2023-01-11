@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.ScheduleFragment"
+    android:orientation="vertical"
+    android:padding="15dp"
+    android:background="?attr/colorPrimaryVariant">
+    
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/buttonPrimary"
+        android:text="@string/cancel"/>
+
+    <LinearLayout
+        android:id="@+id/linearGradeNameHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/linear_rectangle_secondary_variant"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp">
+        <TextView
+            android:id="@+id/textGradeName"
+            style="@style/textOnSecondary.textH4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="10V schedule"
+            android:paddingHorizontal="20dp"/>
+        <Button
+            android:id="@+id/buttonChangeGrade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/buttonPrimary"
+            android:text="@string/choose_grade"
+            android:layout_weight="1"
+            android:layout_gravity="end" />
+    </LinearLayout>
+
+    <ToggleButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/toggleWeekType"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/toggle_week_type_text_color"
+        android:background="@drawable/toggle_week_type" />
+
+    <com.google.android.material.tabs.TabLayout
+    android:layout_marginTop="20dp"
+    android:id="@+id/tabLayoutSchedule"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:textAllCaps="false"
+    android:background="@drawable/tabs_shape"
+    app:tabBackground="@drawable/tabs_selector"
+    app:tabSelectedTextColor="?attr/colorOnSecondary"
+    app:tabTextColor="?attr/colorOnSecondary"
+    app:tabPadding="0dp"
+    app:tabIndicator="@drawable/tabs_indicator"/>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:layout_marginTop="20dp"
+        android:id="@+id/viewPagerSchedule"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+</LinearLayout>

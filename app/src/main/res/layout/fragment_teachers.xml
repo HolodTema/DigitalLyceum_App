@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.TeachersFragment"
+    android:orientation="vertical"
+    android:paddingHorizontal="15dp"
+    android:paddingTop="15dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/teachers_list"
+        android:background="@drawable/linear_rectangle_primary"
+        android:paddingVertical="5dp"
+        android:paddingHorizontal="20dp"
+        style="@style/textOnPrimary.textH4" />
+
+    <EditText
+        android:inputType="text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editSearchTeachers"
+        android:hint="@string/search"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/linear_rectangle_secondary_variant"
+        android:paddingVertical="5dp"
+        android:paddingHorizontal="20dp"
+        style="@style/textOnSecondary.textH4"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/recyclerTeachers"
+        android:layout_weight="1"
+        android:layout_marginTop="20dp"/>
+</LinearLayout>

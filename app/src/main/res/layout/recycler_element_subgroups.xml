@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/linear_rectangle_secondary_variant"
+    android:padding="15dp">
+    <TextView
+        android:id="@+id/textSubgroupNumber"
+        style="@style/textOnSecondary.textH2"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Subgroup No. 1" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/textOnSecondary.textH3"
+        android:layout_marginTop="10dp"
+        android:id="@+id/textSubgroupName"/>
+
+</LinearLayout>
