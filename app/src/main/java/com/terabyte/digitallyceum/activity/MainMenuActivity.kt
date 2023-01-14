@@ -65,14 +65,26 @@ class MainMenuActivity : AppCompatActivity(), OnNavigationItemSelectedListener {
                 toggle.syncState()
 
                 binding.navViewMainMenu.setNavigationItemSelectedListener(this)
-
+                // TODO: here we hid actionbar, but we need to change the title
                 viewModel.liveDataChosenNavViewItemId.observe(this){ id ->
                     binding.navViewMainMenu.setCheckedItem(id)
                     val fragment = when(id) {
-                        R.id.menuItemMain -> MainFragment()
-                        R.id.menuItemSchedule -> ScheduleFragment()
-                        R.id.menuItemTeachers -> TeachersFragment()
-                        R.id.menuItemEvents -> EventsFragment()
+                        R.id.menuItemMain -> {
+                            toolbar.title = resources.getString(R.string.app_name)
+                            MainFragment()
+                        }
+                        R.id.menuItemSchedule -> {
+                            toolbar.title = resources.getString(R.string.navLabelSchedule)
+                            ScheduleFragment()
+                        }
+                        R.id.menuItemTeachers -> {
+                            toolbar.title = resources.getString(R.string.navLabelTeachers)
+                            TeachersFragment()
+                        }
+                        R.id.menuItemEvents -> {
+                            toolbar.title = resources.getString(R.string.navLabelEvents)
+                            EventsFragment()
+                        }
                         else -> {
                             Log.e(Const.LOG_TAG_DRAWER_INCORRECT_MENU_ITEM_ID, "The id in onNavigationItemSelected is incorrect!")
                             MainFragment()

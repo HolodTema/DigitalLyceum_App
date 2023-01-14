@@ -10,4 +10,7 @@
         <item android:id="@+id/menuItemEvents"
         android:title="@string/navLabelEvents"/>
     </group>
+
+    <item android:id="@+id/menuItemChooseSchoolAgain"
+        android:title="@string/change_school_and_grade"/>
 </menu>

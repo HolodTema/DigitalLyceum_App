@@ -56,8 +56,18 @@ AndroidViewModel(application){
         liveDataChosenNavViewItemId.value = itemId
     }
 
-    fun checkIfThereAre2WeekTypes(lessons: List<LessonJson>): Boolean {
+    private fun checkIfThereAre2WeekTypes(lessons: List<LessonJson>): Boolean {
         return RequestManager.checkIfThereAre2WeekTypes(lessons)
+    }
+
+    fun getMinutesToEndIfLessonIsCurrent(lesson: LessonJson): Int? {
+        val calendar = Calendar.getInstance()
+        val hour = calendar.get(Calendar.HOUR)
+        val minute = calendar.get(Calendar.MINUTE)
+        return if(lesson.startTime.hour<=hour && lesson.startTime.minute<=minute && lesson.endTime.hour>=hour && lesson.endTime.minute>=minute) {
+            (lesson.endTime.hour*60+lesson.endTime.minute) - (hour*60+minute)
+        }
+        else null
     }
 
     class Factory(private val application: Application, private val school: SchoolJson,

@@ -1,10 +1,10 @@
 package com.terabyte.digitallyceum.activity
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.CompoundButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.terabyte.digitallyceum.Const
 import com.terabyte.digitallyceum.R
-import com.terabyte.digitallyceum.databinding.ActivityChooseGradeOrSubgroupBinding
+import com.terabyte.digitallyceum.databinding.ActivityChooseSubgroupBinding
 import com.terabyte.digitallyceum.databinding.RecyclerElementSubgroupsBinding
 import com.terabyte.digitallyceum.json.grades.GradeJson
 import com.terabyte.digitallyceum.json.schools.SchoolJson
@@ -22,7 +22,6 @@ import com.terabyte.digitallyceum.viewmodel.NoResponseViewModel
 
 class ChooseSubgroupActivity : AppCompatActivity() {
     private lateinit var grade: GradeJson
-    private lateinit var viewModel: ChooseSubgroupViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +29,7 @@ class ChooseSubgroupActivity : AppCompatActivity() {
 
         grade = intent?.extras!!.getParcelable<GradeJson>(Const.INTENT_GRADE)!!
 
-        viewModel = ViewModelProvider(this, ChooseSubgroupViewModel.Factory(application, grade))[ChooseSubgroupViewModel::class.java]
+        val viewModel = ViewModelProvider(this, ChooseSubgroupViewModel.Factory(application, grade))[ChooseSubgroupViewModel::class.java]
 
         val school = intent?.extras?.getParcelable<SchoolJson>(Const.INTENT_SCHOOL)
         if(school!=null) viewModel.school = school
@@ -45,33 +44,19 @@ class ChooseSubgroupActivity : AppCompatActivity() {
                 startActivity(intent)
             }
             else {
-                val binding = ActivityChooseGradeOrSubgroupBinding.inflate(layoutInflater)
+                val binding = ActivityChooseSubgroupBinding.inflate(layoutInflater)
                 setContentView(binding.root)
 
                 viewModel.chosenSubgroup = it[0]
 
-                val adapter = ChooseSubgroupAdapter(it, layoutInflater, viewModel)
-                binding.recyclerChooseGradeOrSubgroup.adapter = adapter
-                binding.recyclerChooseGradeOrSubgroup.layoutManager = LinearLayoutManager(this)
-                binding.recyclerChooseGradeOrSubgroup.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
+                val adapter = ChooseSubgroupAdapter(this, viewModel.school, grade, it)
+                binding.recyclerChooseSubgroup.adapter = adapter
+                binding.recyclerChooseSubgroup.layoutManager = LinearLayoutManager(this)
+                binding.recyclerChooseSubgroup.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
 
                 binding.buttonCancel.setOnClickListener{
                     val intent = Intent(this, ChooseGradeActivity::class.java)
                         .putExtra(Const.INTENT_SCHOOL, viewModel.school)
-
-                    startActivity(intent)
-                }
-
-                binding.buttonNext.setOnClickListener {
-                    getSharedPreferences(Const.SH_PREFERENCES_NAME, MODE_PRIVATE)
-                        .edit()
-                        .putInt(Const.SH_PREF_KEY_SUBGROUP_ID, viewModel.chosenSubgroup.id)
-                        .commit()
-
-                    val intent = Intent(this, MainMenuActivity::class.java)
-                        .putExtra(Const.INTENT_SCHOOL, viewModel.school)
-                        .putExtra(Const.INTENT_GRADE, grade)
-                        .putExtra(Const.INTENT_SUBGROUP, viewModel.chosenSubgroup)
                     startActivity(intent)
                 }
             }
@@ -84,28 +69,28 @@ class ChooseSubgroupActivity : AppCompatActivity() {
         super.onSaveInstanceState(outState)
     }
 
-    class ChooseSubgroupAdapter(
-        private val subgroups: List<SubgroupJson>,
-        private val inflater: LayoutInflater,
-        private val viewModel: ChooseSubgroupViewModel):
-        RecyclerView.Adapter<ChooseSubgroupAdapter.SubgroupJsonHolder>() {
-        private var checkedRadioButton: CompoundButton? = null
+    class ChooseSubgroupAdapter(private val context: Context,
+    private val chosenSchool: SchoolJson,
+    private val chosenGrade: GradeJson,
+    private val subgroups: List<SubgroupJson>): RecyclerView.Adapter<ChooseSubgroupAdapter.SubgroupJsonHolder>() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-            SubgroupJsonHolder(RecyclerElementSubgroupsBinding.inflate(inflater))
+            SubgroupJsonHolder(RecyclerElementSubgroupsBinding.inflate(LayoutInflater.from(context), parent, false))
 
         override fun onBindViewHolder(holder: SubgroupJsonHolder, position: Int) {
-            holder.bindingSubgroupElement.textRecyclerElementSubgroupsName.text = subgroups[position].name
+            holder.bindingSubgroupElement.textSubgroupName.text = subgroups[position].name
 
-            if(subgroups[position].id == viewModel.chosenSubgroup.id) {
-                holder.bindingSubgroupElement.radioButtonRecyclerElementSubgroup.isChecked = true
-                checkedRadioButton = holder.bindingSubgroupElement.radioButtonRecyclerElementSubgroup
-            }
+            holder.bindingSubgroupElement.buttonChoose.setOnClickListener {
+                context.getSharedPreferences(Const.SH_PREFERENCES_NAME, MODE_PRIVATE)
+                    .edit()
+                    .putInt(Const.SH_PREF_KEY_SUBGROUP_ID, subgroups[position].id)
+                    .commit()
 
-            holder.bindingSubgroupElement.radioButtonRecyclerElementSubgroup.setOnCheckedChangeListener{ compoundButton, _ ->
-                checkedRadioButton?.isChecked = false
-                checkedRadioButton = compoundButton
-                viewModel.chosenSubgroup = subgroups[position]
+                val intent = Intent(context, MainMenuActivity::class.java)
+                    .putExtra(Const.INTENT_SCHOOL, chosenSchool)
+                    .putExtra(Const.INTENT_GRADE, chosenGrade)
+                    .putExtra(Const.INTENT_SUBGROUP, subgroups[position])
+                context.startActivity(intent)
             }
         }
 

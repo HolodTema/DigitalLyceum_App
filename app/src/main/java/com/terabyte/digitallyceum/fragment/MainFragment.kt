@@ -9,6 +9,7 @@ import androidx.fragment.app.activityViewModels
 import com.terabyte.digitallyceum.R
 import com.terabyte.digitallyceum.RequestManager
 import com.terabyte.digitallyceum.databinding.FragmentMainBinding
+import com.terabyte.digitallyceum.databinding.LessonInScheduleActiveBinding
 import com.terabyte.digitallyceum.databinding.LessonInScheduleInactiveBinding
 import com.terabyte.digitallyceum.viewmodel.MainMenuViewModel
 import java.util.*
@@ -47,13 +48,29 @@ class MainFragment : Fragment() {
                 binding.linearScheduleMain.visibility = View.VISIBLE
 
                 // TODO: till new programming session there will be only inactive lessons
-                var bindingLessonElement: LessonInScheduleInactiveBinding
                 val strTime = resources.getString(R.string.lesson_time)
                 for(lesson in todaySchedule) {
-                    bindingLessonElement = LessonInScheduleInactiveBinding.inflate(layoutInflater)
-                    bindingLessonElement.textLessonName.text = lesson.name
-                    bindingLessonElement.textLessonTime.text = String.format(strTime, lesson.startTime.hour, lesson.startTime.minute, lesson.endTime.hour, lesson.endTime.minute)
-                    binding.linearScheduleMain.addView(bindingLessonElement.root)
+                    val minutesToEnd = viewModel.getMinutesToEndIfLessonIsCurrent(lesson)
+                    if(minutesToEnd==null) {
+                        val bindingLessonElement = LessonInScheduleInactiveBinding.inflate(layoutInflater)
+                        bindingLessonElement.textLessonName.text = lesson.name
+                        bindingLessonElement.textLessonTime.text = String.format(strTime, lesson.startTime.hour, lesson.startTime.minute, lesson.endTime.hour, lesson.endTime.minute)
+                        bindingLessonElement.textLessonChamber.text = lesson.room
+                        bindingLessonElement.textLessonTeacher.text = lesson.teacher.name
+                        binding.linearScheduleMain.addView(bindingLessonElement.root)
+                    }
+                    else {
+                        val bindingLessonElement = LessonInScheduleActiveBinding.inflate(layoutInflater)
+                        bindingLessonElement.textLessonName.text = lesson.name
+                        bindingLessonElement.textLessonTime.text = String.format(strTime, lesson.startTime.hour, lesson.startTime.minute, lesson.endTime.hour, lesson.endTime.minute)
+                        bindingLessonElement.textLessonChamber.text = lesson.room
+                        bindingLessonElement.textLessonTeacher.text = lesson.teacher.name
+                        bindingLessonElement.textMinutesToEnd.text = String.format(resources.getString(R.string.lesson_minutes_to_end), minutesToEnd)
+                        binding.linearScheduleMain.addView(bindingLessonElement.root)
+                    }
+
+
+
                 }
             }
         }

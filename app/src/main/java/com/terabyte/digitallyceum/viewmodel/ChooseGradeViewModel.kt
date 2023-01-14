@@ -12,7 +12,6 @@ import com.terabyte.digitallyceum.json.schools.SchoolJson
 class ChooseGradeViewModel(application: Application, school: SchoolJson):
 AndroidViewModel(application) {
     val liveDataGrades = MutableLiveData<List<GradeJson>?>()
-    lateinit var chosenGrade: GradeJson
 
     init{
         RequestManager.getGradesForSchool(school.id) {

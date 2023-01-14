@@ -1,22 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
+    android:layout_margin="10dp"
     android:background="@drawable/linear_rectangle_secondary_variant"
-    android:padding="15dp">
+    android:paddingTop="10dp"
+    android:orientation="vertical">
+
     <TextView
-        android:id="@+id/textSubgroupNumber"
+        android:id="@+id/textSubgroupName"
         style="@style/textOnSecondary.textH2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="some subgroup name"
         android:gravity="center"
+        android:layout_marginHorizontal="10dp"/>
+    <Button
+        android:id="@+id/buttonChoose"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Subgroup No. 1" />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/textOnSecondary.textH3"
+        style="@style/buttonPrimary"
         android:layout_marginTop="10dp"
-        android:id="@+id/textSubgroupName"/>
+        android:text="@string/choose"/>
 
 </LinearLayout>

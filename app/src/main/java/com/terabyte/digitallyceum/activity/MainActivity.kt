@@ -21,13 +21,12 @@ import com.terabyte.digitallyceum.viewmodel.MainViewModel
 import com.terabyte.digitallyceum.viewmodel.NoResponseViewModel
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_download)
 
-        viewModel = ViewModelProvider(this,
+        val viewModel = ViewModelProvider(this,
             MainViewModel.Factory(application)) [MainViewModel::class.java]
 
         viewModel.liveDataSchools.observe(this) { schools ->

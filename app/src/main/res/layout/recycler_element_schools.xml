@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
     android:background="@drawable/linear_rectangle_secondary_variant"
-    android:padding="10dp"
+    android:paddingTop="10dp"
     android:orientation="vertical">
 
     <TextView
@@ -14,6 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="some school name"
+        android:layout_marginHorizontal="10dp"
         android:gravity="center" />
 
     <TextView
@@ -21,7 +22,8 @@
         style="@style/textOnSecondary.textH4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="some school's address" 
+        android:text="some school's address"
+        android:layout_marginHorizontal="10dp"
         android:layout_marginTop="10dp"
         android:gravity="center"/>
     <Button
