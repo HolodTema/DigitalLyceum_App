@@ -3,20 +3,21 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@drawable/linear_rectangle_secondary_variant"
+    android:background="@drawable/linear_rectangle_primary"
     android:padding="15dp">
     <TextView
         android:id="@+id/textSubgroupNumber"
-        style="@style/textOnSecondary.textH2"
+        style="@style/textOnPrimary.textH2"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Subgroup No. 1" />
+        android:text="Subgroup No. 1"
+        android:textColor="?attr/colorSecondary"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/textOnSecondary.textH3"
+        style="@style/textOnPrimary.textH3"
         android:layout_marginTop="10dp"
-        android:id="@+id/textSubgroupName"/>
+        android:id="@+id/textSubgroupName" />
 
 </LinearLayout>

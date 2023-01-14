@@ -16,7 +16,7 @@ AndroidViewModel(application) {
 
 
     enum class NoResponseType {
-        Schools, Grades, Subgroups, Lessons
+        Schools, Grades, Lessons
     }
 
     class Factory(private val application: Application, private val noResponseType: NoResponseType):

@@ -40,11 +40,31 @@
                 android:layout_weight="1"
                 android:layout_marginStart="40dp" />
         </LinearLayout>
+        <ProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/progressBarSubgroups"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/textOnSecondary.textH3"
+            android:text="@string/no_subgroups_for_grade"
+            android:layout_marginHorizontal="10dp"
+            android:id="@+id/textNoSubgroupsForGrade"
+            android:gravity="center"/>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerSubgroups"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonChoose"
+            android:text="@string/choose"
+            style="@style/buttonPrimary"
+            android:layout_marginTop="10dp"/>
+
     </LinearLayout>
 
 </LinearLayout>

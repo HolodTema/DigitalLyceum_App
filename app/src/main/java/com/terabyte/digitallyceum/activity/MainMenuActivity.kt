@@ -14,6 +14,7 @@ import com.google.android.material.navigation.NavigationView.OnNavigationItemSel
 import com.terabyte.digitallyceum.Const
 import com.terabyte.digitallyceum.R
 import com.terabyte.digitallyceum.databinding.ActivityMainMenuBinding
+import com.terabyte.digitallyceum.dialog.ChangeSchoolAndGradeDialogFragment
 import com.terabyte.digitallyceum.fragment.EventsFragment
 import com.terabyte.digitallyceum.fragment.MainFragment
 import com.terabyte.digitallyceum.fragment.ScheduleFragment
@@ -93,21 +94,30 @@ class MainMenuActivity : AppCompatActivity(), OnNavigationItemSelectedListener {
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        val fragment = when(item.itemId) {
-            R.id.menuItemMain -> MainFragment()
-            R.id.menuItemSchedule -> ScheduleFragment()
-            R.id.menuItemTeachers -> TeachersFragment()
-            R.id.menuItemEvents -> EventsFragment()
-            else -> {
-                Log.e(Const.LOG_TAG_DRAWER_INCORRECT_MENU_ITEM_ID, "The id in onNavigationItemSelected is incorrect!")
-                MainFragment()
+        if(item.itemId==R.id.menuItemChangeSchoolAndGrade) {
+            val changeSchoolAndGradeDialogFragment = ChangeSchoolAndGradeDialogFragment()
+            //actually there can be another variant of dialog's showing - using dialog.show()
+            val transaction = supportFragmentManager.beginTransaction()
+            changeSchoolAndGradeDialogFragment.show(transaction, Const.DIALOG_TAG_CHANGE_SCHOOL_AND_GRADE)
+        }
+        else {
+            val fragment = when(item.itemId) {
+                R.id.menuItemMain -> MainFragment()
+                R.id.menuItemSchedule -> ScheduleFragment()
+                R.id.menuItemTeachers -> TeachersFragment()
+                R.id.menuItemEvents -> EventsFragment()
+                else -> {
+                    Log.e(Const.LOG_TAG_DRAWER_INCORRECT_MENU_ITEM_ID, "The id in onNavigationItemSelected is incorrect!")
+                    MainFragment()
+                }
             }
+
+            supportFragmentManager.beginTransaction().replace(R.id.frameLayoutMainMenu, fragment)
+                .commit()
+
+            drawerLayout.closeDrawer(GravityCompat.START)
         }
 
-        supportFragmentManager.beginTransaction().replace(R.id.frameLayoutMainMenu, fragment)
-            .commit()
-
-        drawerLayout.closeDrawer(GravityCompat.START)
         return true
     }
 }

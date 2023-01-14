@@ -35,12 +35,6 @@ class NoResponseActivity : AppCompatActivity() {
                 val chosenSchool = intent?.extras?.getParcelable<SchoolJson>(Const.INTENT_SCHOOL)
                 if(chosenSchool!=null) viewModel.chosenSchool = chosenSchool
             }
-            NoResponseType.Subgroups -> {
-                val chosenSchool = intent?.extras?.getParcelable<SchoolJson>(Const.INTENT_SCHOOL)
-                if(chosenSchool!=null) viewModel.chosenSchool = chosenSchool
-                val chosenGrade = intent?.extras?.getParcelable<GradeJson>(Const.INTENT_GRADE)
-                if(chosenGrade!=null) viewModel.chosenGrade = chosenGrade
-            }
             NoResponseType.Lessons -> {
                 val chosenSchool = intent?.extras?.getParcelable<SchoolJson>(Const.INTENT_SCHOOL)
                 if(chosenSchool!=null) viewModel.chosenSchool = chosenSchool
@@ -59,11 +53,6 @@ class NoResponseActivity : AppCompatActivity() {
                 NoResponseType.Grades -> {
                     Intent(this, ChooseGradeActivity::class.java)
                         .putExtra(Const.INTENT_SCHOOL, viewModel.chosenSchool)
-                }
-                NoResponseType.Subgroups -> {
-                    Intent(this, ChooseSubgroupActivity::class.java)
-                        .putExtra(Const.INTENT_SCHOOL, viewModel.chosenSchool)
-                        .putExtra(Const.INTENT_GRADE, viewModel.chosenGrade)
                 }
                 NoResponseType.Lessons -> {
                     Intent(this, MainMenuActivity::class.java)

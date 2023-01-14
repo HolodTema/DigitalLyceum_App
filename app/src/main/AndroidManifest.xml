@@ -23,13 +23,6 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".activity.ChooseSubgroupActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".activity.ChooseGradeActivity"
             android:exported="false">
             <meta-data

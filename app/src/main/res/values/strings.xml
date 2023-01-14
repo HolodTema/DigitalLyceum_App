@@ -57,4 +57,10 @@
     <string name="grade_name">%s класс</string>
     <string name="hello">Привет!</string>
     <string name="choose">Выбрать</string>
+    <string name="are_you_sure_you_want_to_change_school">Вы действительно хотите сменить школу и класс?</string>
+    <string name="no">Нет</string>
+    <string name="yes">Да</string>
+    <string name="subgroup_with_number">Подгруппа %d</string>
+    <string name="no_subgroups_for_grade">У этого класса нет подгрупп...</string>
+    <string name="weekend">Выходные</string>
 </resources>

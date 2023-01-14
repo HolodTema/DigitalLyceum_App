@@ -61,6 +61,14 @@ class MainFragment : Fragment() {
         val calendar = Calendar.getInstance()
         val dayOfWeekCalendarFormat = calendar.get(Calendar.DAY_OF_WEEK)
         binding.textDayOfWeek.text = resources.getStringArray(R.array.daysOfWeek)[RequestManager.dayCalendarTo0to6Format(dayOfWeekCalendarFormat)]
+        if(dayOfWeekCalendarFormat==Calendar.SUNDAY) {
+            binding.textDayType.text = resources.getString(R.string.weekend)
+            binding.imageDayType.setImageResource(R.drawable.day_type_weekend)
+        }
+        else {
+            binding.textDayType.text = resources.getString(R.string.day_type_ordinary)
+            binding.imageDayType.setImageResource(R.drawable.day_type_ordinary)
+        }
 
         //there's button 'schedule' above linearScheduleMain
         binding.buttonSchedule.setOnClickListener {
