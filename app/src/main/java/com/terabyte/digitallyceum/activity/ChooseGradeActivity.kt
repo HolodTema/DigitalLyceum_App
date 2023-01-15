@@ -42,20 +42,15 @@ class ChooseGradeActivity : AppCompatActivity() {
                 val binding = ActivityChooseGradeOrSubgroupBinding.inflate(layoutInflater)
                 setContentView(binding.root)
 
-                val gradeNumbers = Array(grades.size){""}
-                val gradeLetters = Array(grades.size){""}
-                for((i, grade) in grades.withIndex()) {
-                    gradeNumbers[i] = grade.number.toString()
-                    gradeLetters[i]= grade.letter
-                }
-
                 binding.numberPickerGradeNumber.minValue = 0
-                binding.numberPickerGradeNumber.maxValue = grades.size-1
-                binding.numberPickerGradeNumber.displayedValues = gradeNumbers
-                binding.numberPickerGradeNumber.value = viewModel.positionOfChosenGrade
+                binding.numberPickerGradeNumber.maxValue = viewModel.hashMapGradeNumbersAndLetters.size-1
+                binding.numberPickerGradeNumber.displayedValues = viewModel.hashMapGradeNumbersAndLetters.keys.toTypedArray()
+                binding.numberPickerGradeNumber.value = viewModel.positionOfChosenGradeNumber
                 binding.numberPickerGradeNumber.setOnValueChangedListener { _, _, newValue ->
-                    viewModel.positionOfChosenGrade = newValue
-                    viewModel.chosenGrade = grades[newValue]
+                    viewModel.positionOfChosenGradeNumber = newValue
+                    viewModel.positionOfChosenGradeLetter = 0
+                    binding.numberPickerGradeLetter.value = viewModel.positionOfChosenGradeLetter
+                    viewModel.chosenGrade = viewModel.getGradeByNumberAndLetterPosition(grades)
                     viewModel.updateSubgroups()
                     binding.recyclerSubgroups.visibility = View.GONE
                     binding.textNoSubgroupsForGrade.visibility = View.GONE
@@ -64,12 +59,13 @@ class ChooseGradeActivity : AppCompatActivity() {
                 }
 
                 binding.numberPickerGradeLetter.minValue = 0
-                binding.numberPickerGradeLetter.maxValue = grades.size-1
-                binding.numberPickerGradeLetter.displayedValues = gradeLetters
-                binding.numberPickerGradeLetter.value = viewModel.positionOfChosenGrade
+                val chosenKey = viewModel.hashMapGradeNumbersAndLetters.keys.toTypedArray()[viewModel.positionOfChosenGradeNumber]
+                binding.numberPickerGradeLetter.maxValue = viewModel.hashMapGradeNumbersAndLetters.getValue(chosenKey).size-1
+                binding.numberPickerGradeLetter.displayedValues = viewModel.hashMapGradeNumbersAndLetters.getValue(chosenKey).toTypedArray()
+                binding.numberPickerGradeLetter.value = viewModel.positionOfChosenGradeLetter
                 binding.numberPickerGradeLetter.setOnValueChangedListener { _, _, newValue ->
-                    viewModel.positionOfChosenGrade = newValue
-                    viewModel.chosenGrade = grades[newValue]
+                    viewModel.positionOfChosenGradeLetter = newValue
+                    viewModel.chosenGrade = viewModel.getGradeByNumberAndLetterPosition(grades)
                     viewModel.updateSubgroups()
                     binding.recyclerSubgroups.visibility = View.GONE
                     binding.textNoSubgroupsForGrade.visibility = View.GONE

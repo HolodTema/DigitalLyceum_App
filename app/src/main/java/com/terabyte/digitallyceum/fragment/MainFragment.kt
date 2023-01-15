@@ -26,6 +26,7 @@ class MainFragment : Fragment() {
         binding.linearScheduleMain.visibility = View.GONE
         binding.textNoLessons.visibility = View.GONE
         binding.progressBarTodaySchedule.visibility = View.VISIBLE
+        binding.textTimeToHolidays.visibility = View.GONE
 
 
         //the main fragment's idea is immutability of fragment like a finished ui component
@@ -53,8 +54,20 @@ class MainFragment : Fragment() {
                     bindingLessonElement = LessonInScheduleInactiveBinding.inflate(layoutInflater)
                     bindingLessonElement.textLessonName.text = lesson.name
                     bindingLessonElement.textLessonTime.text = String.format(strTime, lesson.startTime.hour, lesson.startTime.minute, lesson.endTime.hour, lesson.endTime.minute)
+                    bindingLessonElement.textLessonTeacher.text = lesson.teacher.name
+                    bindingLessonElement.textLessonChamber.text = lesson.room
                     binding.linearScheduleMain.addView(bindingLessonElement.root)
                 }
+            }
+        }
+
+        viewModel.liveDataCurrentSemester.observe(requireActivity()) { currentSemester ->
+            if(currentSemester==null) {
+                binding.textTimeToHolidays.visibility = View.GONE
+            }
+            else {
+                binding.textTimeToHolidays.visibility = View.VISIBLE
+                binding.textTimeToHolidays.text = String.format(resources.getString(R.string.semester_start_end), currentSemester.startDate.day, currentSemester.startDate.month, currentSemester.startDate.year, currentSemester.endDate.day, currentSemester.endDate.month, currentSemester.endDate.year)
             }
         }
 

@@ -11,6 +11,9 @@ import com.terabyte.digitallyceum.json.lessons.LessonJson
 import com.terabyte.digitallyceum.json.lessons.LessonsListJson
 import com.terabyte.digitallyceum.json.schools.SchoolJson
 import com.terabyte.digitallyceum.json.schools.SchoolsListJson
+import com.terabyte.digitallyceum.json.semesters.CurrentSemesterRootJson
+import com.terabyte.digitallyceum.json.semesters.SemesterJson
+import com.terabyte.digitallyceum.json.semesters.SemestersListJson
 import com.terabyte.digitallyceum.json.subgroups.SubgroupJson
 import com.terabyte.digitallyceum.json.subgroups.SubgroupsListJson
 import com.terabyte.digitallyceum.json.teachers.TeacherJson
@@ -183,6 +186,38 @@ object RetrofitManager {
             }
 
             override fun onFailure(call: Call<LessonsListJson>, t: Throwable) {
+                Log.e(Const.LOG_TAG_RETROFIT_ON_FAILURE, t.toString())
+                listener(null)
+            }
+        })
+    }
+
+    fun getSemesters(listener: (List<SemesterJson>?) -> Unit) {
+        createClient()
+        val service = retrofit?.create(SemestersService::class.java)
+        val call = service?.getSemesters() ?: throw CantCreateRetrofitRequestException()
+        call.enqueue(object: Callback<SemestersListJson> {
+            override fun onResponse(call: Call<SemestersListJson>, response: Response<SemestersListJson>) {
+                listener(response.body()?.semesters)
+            }
+
+            override fun onFailure(call: Call<SemestersListJson>, t: Throwable) {
+                Log.e(Const.LOG_TAG_RETROFIT_ON_FAILURE, t.toString())
+                listener(null)
+            }
+        })
+    }
+
+    fun getCurrentSemester(listener: (CurrentSemesterRootJson?) -> Unit) {
+        createClient()
+        val service = retrofit?.create(CurrentSemesterService::class.java)
+        val call = service?.getCurrentSemester() ?: throw CantCreateRetrofitRequestException()
+        call.enqueue(object: Callback<CurrentSemesterRootJson> {
+            override fun onResponse(call: Call<CurrentSemesterRootJson>, response: Response<CurrentSemesterRootJson>) {
+                listener(response.body())
+            }
+
+            override fun onFailure(call: Call<CurrentSemesterRootJson>, t: Throwable) {
                 Log.e(Const.LOG_TAG_RETROFIT_ON_FAILURE, t.toString())
                 listener(null)
             }

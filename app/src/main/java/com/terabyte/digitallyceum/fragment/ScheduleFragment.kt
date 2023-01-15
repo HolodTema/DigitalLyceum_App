@@ -73,6 +73,10 @@ class ScheduleFragment : Fragment() {
             startActivity(intent)
         }
 
+        binding.buttonCancel.setOnClickListener {
+            viewModel.updateChosenNavViewItemId(R.id.menuItemMain)
+        }
+
         return binding.root
     }
 

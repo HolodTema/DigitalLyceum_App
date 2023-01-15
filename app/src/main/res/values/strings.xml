@@ -63,4 +63,5 @@
     <string name="subgroup_with_number">Подгруппа %d</string>
     <string name="no_subgroups_for_grade">У этого класса нет подгрупп...</string>
     <string name="weekend">Выходные</string>
+    <string name="semester_start_end">Начало семестра: %02d.%02d.%d\nКонец семестра: %02d.%02d.%d</string>
 </resources>

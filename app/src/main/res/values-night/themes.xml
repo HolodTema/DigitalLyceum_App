@@ -21,6 +21,10 @@
         <item name="colorOnSecondary">
             @color/color_on_secondary_night
         </item>
+
+        <item name="colorPrimaryButtonText">@color/color_primary_button_text_night</item>
+        <item name="colorTransparentButtonText">@color/color_transparent_button_text_night</item>
+
         <!-- Status bar color. -->
         <item name="android:statusBarColor">
             ?attr/colorPrimaryVariant

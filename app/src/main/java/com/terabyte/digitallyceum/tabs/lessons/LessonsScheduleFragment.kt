@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.terabyte.digitallyceum.NoLessonsWhenFragmentCreatedException
@@ -32,7 +31,6 @@ class LessonsScheduleFragment : Fragment() {
                 val adapter = LessonsAdapter(layoutInflater, lessons, resources.getString(R.string.lesson_time))
                 binding.recyclerLessons.adapter = adapter
                 binding.recyclerLessons.layoutManager = LinearLayoutManager(activity)
-                binding.recyclerLessons.addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
                 binding.root
             }
         }

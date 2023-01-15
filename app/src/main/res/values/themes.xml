@@ -12,6 +12,9 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorSecondaryVariant</item>
         <item name="android:actionBarStyle">@style/Theme.DigitalLyceum.ActionBar</item>
+
+        <item name="colorPrimaryButtonText">@color/color_primary_button_text</item>
+        <item name="colorTransparentButtonText">@color/color_transparent_button_text</item>
     </style>
 
     <style name="Theme.DigitalLyceum.ActionBar">

@@ -11,6 +11,7 @@ import com.terabyte.digitallyceum.RequestManager
 import com.terabyte.digitallyceum.json.grades.GradeJson
 import com.terabyte.digitallyceum.json.lessons.LessonJson
 import com.terabyte.digitallyceum.json.schools.SchoolJson
+import com.terabyte.digitallyceum.json.semesters.SemesterJson
 import com.terabyte.digitallyceum.json.subgroups.SubgroupJson
 import java.util.*
 
@@ -21,6 +22,7 @@ AndroidViewModel(application){
     //we need this liveData for simple jumping between fragments in navView for proper working
     val liveDataChosenNavViewItemId = MutableLiveData<Int>()
     val liveDataLessonsForDefiniteDay = MutableLiveData<List<LessonJson>>()
+    val liveDataCurrentSemester = MutableLiveData<SemesterJson>()
 
     var chosenWeek = false
     var chosenDayCalendarFormat = Calendar.MONDAY
@@ -36,6 +38,9 @@ AndroidViewModel(application){
                 updateChosenNavViewItemId(R.id.menuItemMain)
                 RequestManager.getTodaySchedule(subgroup.id, grade.id) { todaySchedule ->
                     liveDataTodaySchedule.value = todaySchedule
+                }
+                RequestManager.getCurrentSemester { currentSemesterRootJson ->
+                    liveDataCurrentSemester.value = currentSemesterRootJson?.semester
                 }
             }
         }

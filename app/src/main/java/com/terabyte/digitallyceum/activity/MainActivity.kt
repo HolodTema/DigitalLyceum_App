@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.terabyte.digitallyceum.Const
@@ -52,8 +51,6 @@ class MainActivity : AppCompatActivity() {
         val adapter = SchoolAdapter(this, schools)
         binding.recyclerChooseSchool.adapter = adapter
         binding.recyclerChooseSchool.layoutManager = LinearLayoutManager(this)
-        binding.recyclerChooseSchool
-            .addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
     }
 
     private fun startNoResponseActivity() {

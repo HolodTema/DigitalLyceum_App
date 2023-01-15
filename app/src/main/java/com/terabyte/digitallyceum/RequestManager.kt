@@ -3,6 +3,8 @@ package com.terabyte.digitallyceum
 import com.terabyte.digitallyceum.json.grades.GradeJson
 import com.terabyte.digitallyceum.json.lessons.LessonJson
 import com.terabyte.digitallyceum.json.schools.SchoolJson
+import com.terabyte.digitallyceum.json.semesters.CurrentSemesterRootJson
+import com.terabyte.digitallyceum.json.semesters.SemesterJson
 import com.terabyte.digitallyceum.json.subgroups.SubgroupJson
 import com.terabyte.digitallyceum.json.teachers.TeacherJson
 import com.terabyte.digitallyceum.retrofit.RetrofitManager
@@ -78,6 +80,18 @@ object RequestManager {
             if(lesson.weekday==day0to6) result.add(lesson)
         }
         return result
+    }
+
+    fun getSemesters(listener: (List<SemesterJson>?) -> Unit) {
+        RetrofitManager.getSemesters{
+            listener(it)
+        }
+    }
+
+    fun getCurrentSemester(listener: (CurrentSemesterRootJson?) -> Unit) {
+        RetrofitManager.getCurrentSemester{
+            listener(it)
+        }
     }
 
     fun day0to6toCalendarFormat(day0to6: Int): Int {

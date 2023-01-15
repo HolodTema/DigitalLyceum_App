@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/linear_rectangle_secondary_variant"
     android:paddingHorizontal="15dp"
     android:paddingVertical="20dp"
     android:orientation="vertical">

@@ -11,12 +11,16 @@
     <color name="color_secondary">#FFC936</color>
     <color name="color_secondary_variant">#FFFFFF</color>
     <color name="color_on_secondary">#FF000000</color>
+    <color name="color_primary_button_text">#FFFFFF</color>
+    <color name="color_transparent_button_text">#FF000000</color>
 
-    <color name="color_primary_night">#2D2D2F</color>
-    <color name="color_primary_variant_night">#121214</color>
+    <color name="color_primary_night">#3A3B3C</color>
+    <color name="color_primary_variant_night">#1E1E1E</color>
     <color name="color_on_primary_night">#FFFFFF</color>
 
-    <color name="color_secondary_night">#FFC936</color>
-    <color name="color_secondary_variant_night">#272729</color>
+    <color name="color_secondary_night">#B087FF</color>
+    <color name="color_secondary_variant_night">#2B2B2B</color>
     <color name="color_on_secondary_night">#FFFFFF</color>
+    <color name="color_primary_button_text_night">#B087FF</color>
+    <color name="color_transparent_button_text_night">#B087FF</color>
 </resources>
